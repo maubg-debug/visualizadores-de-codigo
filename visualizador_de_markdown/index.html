@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Simple app for your notes">
+  <meta name="keywords" content="markdown, notes">
+  <meta name="author" content="Herman Zvonimir Došilović">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      skipStartupTypeset: true,
+      tex2jax: {inlineMath: [['$','$']]},
+      messageStyle: "none",
+      ignoreClass: ".*",
+      processClass: "math",
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/codemirror.min.css" rel="stylesheet"/>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/addon/dialog/dialog.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/addon/dialog/dialog.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/addon/edit/matchbrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/addon/search/search.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/addon/search/searchcursor.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/addon/selection/active-line.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.30.0/keymap/vim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/edit/closebrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/edit/continuelist.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/addon/selection/active-line.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/mode/markdown/markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/addon/display/rulers.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.min.css" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.7/download.min.js"></script>
+
+  <link href="css/site.css" rel="stylesheet"/>
+  <link href="css/edit.css" rel="stylesheet"/>
+
+  <script src="js/cloud.js"></script>
+  <script src="js/edit.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/storage.js"></script>
+
+  <title>Markdown Notes</title>
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+  <div id="site-navigation" class="ui borderless menu site-navigation">
+    <a href="https://notes.dosilovic.com" class="header item">Markdown Notes</a>
+    <div class="left menu">
+      <div class="item">
+        <div class="ui icon buttons">
+          <button id="saveBtn" class="ui icon button site-popup" data-content="Save (Ctrl+S)" data-position="bottom center" onclick="saveNote()"><i class="save icon"></i></button>
+          <button id="downloadBtn" class="ui icon button site-popup" data-content="Download Markdown" data-variation="wide" data-position="bottom center" onclick="downloadNote()"><i class="download icon"></i></button>
+          <button id="downloadPdfBtn" class="ui icon button site-popup" data-content="Download PDF" data-position="bottom center" onclick="downloadPdf()"><i class="file pdf outline icon"></i></button>
+          <button id="shareBtn" class="ui icon button site-popup" data-content="Share" data-position="bottom center" onclick="shareNote()"><i class="share alternate icon"></i></button>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui icon buttons">
+          <button id="writeBtn" class="ui icon button site-popup" data-content="Editor View" data-position="bottom center" onclick="changeView('writeBtn')"><i class="write icon"></i></button>
+          <button id="splitBtn" class="ui icon basic button site-popup" data-content="Split View" data-position="bottom center" onclick="changeView('splitBtn')"><i class="columns icon"></i></button>
+        </div>
+      </div>
+      <div class="item">
+        <div class="ui checkbox">
+          <input id="vimCheckbox" type="checkbox" tabindex="0" class="hidden"/>
+          <label>Vim Mode</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-content" class="ui two column grid">
+    <div id="editor" class="column"><textarea></textarea></div>
+    <div id="preview" class="column markdown-body"></div>
+    <div id="message-modal" class="ui mini modal">
+      <div class="header"></div>
+      <div class="content"></div>
+    </div>
+  </div>
+
+  <div id="site-footer" class="ui center aligned segment">
+    <div class="ui container">
+      <p>© 2017-2020 <a href="https://hermanz.dosilovic.com">Herman Zvonimir Došilović</a>. Available on <a href="https://github.com/hermanzdosilovic/notes">GitHub</a>.</p>
+    </div>
+  </div>
+</body>
+</html>

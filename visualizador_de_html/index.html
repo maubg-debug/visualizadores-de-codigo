@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de HTML</title>
+
+    <!-- LOS ESCRIPTS DE JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+
+    <!--Estilos-->
+    <style>
+        html,body { margin:0; padding:0; height:100%; width:100%; overflow: hidden;}
+
+        #editor {
+            height: 100%;
+            width:50%;
+            display:inline-block;
+        }
+        
+        #container {
+            height:100%;
+            width:auto;
+          white-space : nowrap; 
+          overflow : hidden;
+          position:relative;
+        }
+        
+        #iframe {
+            height:100%;
+            display:inline-block;
+            width:50%;
+        }
+
+        .ace_editor .ace_marker-layer .ace_bracket { display: none }
+    </style>
+
+</head>
+<body>
+    
+    <div id="container">
+        <div id="editor"></div>
+
+
+        <iframe id="iframe" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        
+        function actualizar()
+        {
+            var idoc = document.getElementById('iframe').contentWindow.document;
+        
+            idoc.open();
+            idoc.write(editor.getValue());
+            idoc.close();
+        }
+        
+        function prepararElEditor()
+        {
+          window.editor = ace.edit("editor");
+          editor.setTheme("ace/theme/monokai");
+          editor.getSession().setMode("ace/mode/html");
+          editor.setValue(`<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+
+    <body>
+    </body>
+
+</html>`,1); //1 = mover el cursor al final
+        
+          editor.getSession().on('change', function() {
+            actualizar();
+          });
+        
+          editor.focus();
+          
+          
+          editor.setOptions({
+            fontSize: "16pt",
+            showLineNumbers: false,
+            showGutter: false,
+            vScrollBarAlwaysVisible:true,
+            enableBasicAutocompletion: false, enableLiveAutocompletion: false
+          });
+        
+          editor.setShowPrintMargin(false);
+          editor.setBehavioursEnabled(false);
+        }
+        
+        prepararElEditor();
+        actualizar();
+
+    </script>
+</body>
+</html>
