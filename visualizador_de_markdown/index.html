@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Simple app for your notes">
-  <meta name="keywords" content="markdown, notes">
-  <meta name="author" content="Herman Zvonimir Došilović">
+  <meta name="description" content="App para tu markdown">
+  <meta name="keywords" content="markdown">
+  <meta name="author" content="Maubg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -48,40 +48,40 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.7/download.min.js"></script>
 
-  <link href="css/site.css" rel="stylesheet"/>
-  <link href="css/edit.css" rel="stylesheet"/>
+  <link href="./css/site.css" rel="stylesheet"/>
+  <link href="./css/edit.css" rel="stylesheet"/>
 
-  <script src="js/cloud.js"></script>
-  <script src="js/edit.js"></script>
-  <script src="js/site.js"></script>
-  <script src="js/storage.js"></script>
+  <script src="./js/cloud.js"></script>
+  <script src="./js/edit.js"></script>
+  <script src="./js/site.js"></script>
+  <script src="./js/storage.js"></script>
 
-  <title>Markdown Notes</title>
+  <title>Maubg | Markdown</title>
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
   <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 </head>
 <body>
   <div id="site-navigation" class="ui borderless menu site-navigation">
-    <a href="https://notes.dosilovic.com" class="header item">Markdown Notes</a>
+    <a href="https://notes.dosilovic.com" class="header item">Maubg | Markdown</a>
     <div class="left menu">
       <div class="item">
         <div class="ui icon buttons">
-          <button id="saveBtn" class="ui icon button site-popup" data-content="Save (Ctrl+S)" data-position="bottom center" onclick="saveNote()"><i class="save icon"></i></button>
-          <button id="downloadBtn" class="ui icon button site-popup" data-content="Download Markdown" data-variation="wide" data-position="bottom center" onclick="downloadNote()"><i class="download icon"></i></button>
-          <button id="downloadPdfBtn" class="ui icon button site-popup" data-content="Download PDF" data-position="bottom center" onclick="downloadPdf()"><i class="file pdf outline icon"></i></button>
-          <button id="shareBtn" class="ui icon button site-popup" data-content="Share" data-position="bottom center" onclick="shareNote()"><i class="share alternate icon"></i></button>
+          <button id="saveBtn" class="ui icon button site-popup" data-content="Guardar (Ctrl+S)" data-position="bottom center" onclick="saveNote()"><i class="save icon"></i></button>
+          <button id="downloadBtn" class="ui icon button site-popup" data-content="Descargar markdown" data-variation="wide" data-position="bottom center" onclick="downloadNote()"><i class="download icon"></i></button>
+          <button id="downloadPdfBtn" class="ui icon button site-popup" data-content="Descargar como PDF" data-position="bottom center" onclick="downloadPdf()"><i class="file pdf outline icon"></i></button>
+          <button id="shareBtn" class="ui icon button site-popup" data-content="Compartir" data-position="bottom center" onclick="shareNote()"><i class="share alternate icon"></i></button>
         </div>
       </div>
       <div class="item">
         <div class="ui icon buttons">
-          <button id="writeBtn" class="ui icon button site-popup" data-content="Editor View" data-position="bottom center" onclick="changeView('writeBtn')"><i class="write icon"></i></button>
-          <button id="splitBtn" class="ui icon basic button site-popup" data-content="Split View" data-position="bottom center" onclick="changeView('splitBtn')"><i class="columns icon"></i></button>
+          <button id="writeBtn" class="ui icon button site-popup" data-content="Vista del editor" data-position="bottom center" onclick="changeView('writeBtn')"><i class="write icon"></i></button>
+          <button id="splitBtn" class="ui icon basic button site-popup" data-content="Dividir vista" data-position="bottom center" onclick="changeView('splitBtn')"><i class="columns icon"></i></button>
         </div>
       </div>
       <div class="item">
         <div class="ui checkbox">
           <input id="vimCheckbox" type="checkbox" tabindex="0" class="hidden"/>
-          <label>Vim Mode</label>
+          <label>Modo vim</label>
         </div>
       </div>
     </div>

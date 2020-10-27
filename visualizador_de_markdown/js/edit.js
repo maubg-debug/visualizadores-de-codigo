@@ -86,7 +86,7 @@ function saveNote(callback) {
 }
 
 function downloadNote() {
-  download(editor.getValue(), "note.md", "text/plain");
+  download(editor.getValue(), "nota.md", "text/plain");
 }
 
 function downloadPdf() {
